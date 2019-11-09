@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import kotlinx.android.extensions.LayoutContainer
+import kotlinx.android.synthetic.main.league_items.view.*
 
 class LeagueAdapter(private val context: Context, private val items: List<LeagueItems>, private val listener: (LeagueItems) ->  Unit)
     : RecyclerView.Adapter<LeagueAdapter.ViewHolder>() {
@@ -20,11 +22,9 @@ class LeagueAdapter(private val context: Context, private val items: List<League
 
     override fun getItemCount(): Int = items.size
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val badge = view.findViewById<ImageView>(R.id.badge)
-
+    class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
         fun bindItem(items: LeagueItems, listener: (LeagueItems) -> Unit) {
-            items.badge?.let { Picasso.get().load(it).fit().into(badge) }
+            items.badge?.let { Picasso.get().load(it).fit().into(itemView.badge) }
             itemView.setOnClickListener {
                 listener(items)
             }

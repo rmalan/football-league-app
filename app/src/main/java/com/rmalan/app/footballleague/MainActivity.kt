@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,11 +15,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val list = findViewById<RecyclerView>(R.id.league_list)
         initData()
 
-        list.layoutManager = GridLayoutManager(this, 2)
-        list.adapter = LeagueAdapter(this, items) {
+        league_list.layoutManager = GridLayoutManager(this, 2)
+        league_list.adapter = LeagueAdapter(this, items) {
             val toast = Toast.makeText(applicationContext, it.name, Toast.LENGTH_SHORT)
             toast.show()
         }
