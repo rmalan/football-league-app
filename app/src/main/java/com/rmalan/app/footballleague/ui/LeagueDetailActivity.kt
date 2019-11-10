@@ -1,9 +1,10 @@
-package com.rmalan.app.footballleague
+package com.rmalan.app.footballleague.ui
 
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.rmalan.app.footballleague.entity.LeagueItems
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.*
 

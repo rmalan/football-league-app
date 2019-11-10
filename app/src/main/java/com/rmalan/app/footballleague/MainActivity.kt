@@ -3,6 +3,9 @@ package com.rmalan.app.footballleague
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import com.rmalan.app.footballleague.adapter.LeagueAdapter
+import com.rmalan.app.footballleague.entity.LeagueItems
+import com.rmalan.app.footballleague.ui.LeagueDetailActivity
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 
@@ -24,9 +27,10 @@ class MainActivity : AppCompatActivity() {
 
                 recyclerView {
                     layoutManager = GridLayoutManager(context, 2)
-                    adapter = LeagueAdapter(context, leagueItems) {
-                        startActivity<LeagueDetailActivity>(LeagueDetailActivity.EXTRA_LEAGUE_ITEM to it)
-                    }
+                    adapter =
+                        LeagueAdapter(leagueItems) {
+                            startActivity<LeagueDetailActivity>(LeagueDetailActivity.EXTRA_LEAGUE_ITEM to it)
+                        }
                 }
             }
         }

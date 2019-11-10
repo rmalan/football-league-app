@@ -1,4 +1,4 @@
-package com.rmalan.app.footballleague
+package com.rmalan.app.footballleague.entity
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
