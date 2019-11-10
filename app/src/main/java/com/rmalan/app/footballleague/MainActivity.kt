@@ -1,26 +1,34 @@
 package com.rmalan.app.footballleague
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.*
+import org.jetbrains.anko.recyclerview.v7.recyclerView
 
 class MainActivity : AppCompatActivity() {
 
-    private var items: MutableList<LeagueItems> = mutableListOf()
+    private var leagueItems: MutableList<LeagueItems> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        MainActivityUI(leagueItems).setContentView(this)
 
         initData()
+    }
 
-        league_list.layoutManager = GridLayoutManager(this, 2)
-        league_list.adapter = LeagueAdapter(this, items) {
-            val toast = Toast.makeText(applicationContext, it.name, Toast.LENGTH_SHORT)
-            toast.show()
+    inner class MainActivityUI(val leagueItems: List<LeagueItems>) : AnkoComponent<MainActivity> {
+        override fun createView(ui: AnkoContext<MainActivity>) = with(ui) {
+            verticalLayout() {
+                lparams(width = matchParent, height = wrapContent)
+
+                recyclerView {
+                    layoutManager = GridLayoutManager(context, 2)
+                    adapter = LeagueAdapter(context, leagueItems) {
+                        startActivity<LeagueDetailActivity>(LeagueDetailActivity.EXTRA_LEAGUE_ITEM to it)
+                    }
+                }
+            }
         }
     }
 
@@ -28,11 +36,15 @@ class MainActivity : AppCompatActivity() {
         val name = resources.getStringArray(R.array.league_name)
         val description = resources.getStringArray(R.array.description)
         val badge = resources.obtainTypedArray(R.array.league_badge)
-        items.clear()
+        leagueItems.clear()
         for (i in name.indices) {
-            items.add(LeagueItems(name[i],
-                description[i],
-                badge.getResourceId(i, 0)))
+            leagueItems.add(
+                LeagueItems(
+                    name[i],
+                    description[i],
+                    badge.getResourceId(i, 0)
+                )
+            )
         }
 
         badge.recycle()

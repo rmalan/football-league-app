@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Football League</string>
     <string name="badge">Badge</string>
+    <string name="league_name">League Name</string>
+    <string name="league_description">League Description</string>
 
     <string-array name="league_name">
         <item>English Premier League</item>
