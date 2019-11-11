@@ -23,11 +23,11 @@ class LeagueDetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    inner class LeagueDetailActivityUI(val leagueItem: LeagueItems) :
+    inner class LeagueDetailActivityUI(private val leagueItem: LeagueItems) :
         AnkoComponent<LeagueDetailActivity> {
-        val viewId = 1
-        val badgeId = 2
-        val nameId = 3
+        private val viewId = 1
+        private val badgeId = 2
+        private val nameId = 3
 
         override fun createView(ui: AnkoContext<LeagueDetailActivity>) = with(ui) {
             scrollView {
