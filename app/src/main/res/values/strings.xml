@@ -5,6 +5,8 @@
     <string name="league_description">League Description</string>
     <string name="league_badge">League Badge</string>
     <string name="league_fanart">League Fan Art</string>
+    <string name="tab_previous">Previous Match</string>
+    <string name="tab_next">Next Match</string>
 
     <string-array name="league_id">
         <item>4328</item>
@@ -103,4 +105,5 @@ Sky Sports currently show live League One matches with highlights shown on BBC O
         <item>@drawable/scotish_premier_league</item>
         <item>@drawable/english_league_1</item>
     </array>
+
 </resources>

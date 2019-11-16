@@ -5,6 +5,7 @@ import android.util.Log
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
+import com.rmalan.app.footballleague.adapter.SectionsPagerAdapter
 import com.rmalan.app.footballleague.api.ApiRepository
 import com.rmalan.app.footballleague.model.LeagueDetail
 import com.rmalan.app.footballleague.presenter.LeagueDetailPresenter
@@ -38,6 +39,11 @@ class LeagueDetailActivity : AppCompatActivity(), LeagueDetailView {
         presenter = LeagueDetailPresenter(this, request, gson)
         presenter.getLeagueDetail(leagueId)
 
+        val sectionPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
+        view_pager.adapter = sectionPagerAdapter
+        tabs.setupWithViewPager(view_pager)
+
+        supportActionBar?.elevation = 0f
     }
 
     override fun showLoading() {
