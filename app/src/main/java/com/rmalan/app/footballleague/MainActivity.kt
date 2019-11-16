@@ -1,42 +1,45 @@
 package com.rmalan.app.footballleague
 
 import android.os.Bundle
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.rmalan.app.footballleague.adapter.LeagueAdapter
-import com.rmalan.app.footballleague.entity.LeagueItems
-import com.rmalan.app.footballleague.ui.LeagueDetailActivity
+import com.rmalan.app.footballleague.model.LeagueItems
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 
 class MainActivity : AppCompatActivity() {
 
     private var leagueItems: MutableList<LeagueItems> = mutableListOf()
+    private lateinit var listLeague: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        MainActivityUI(leagueItems).setContentView(this)
+        linearLayout {
+            lparams(width = matchParent, height = wrapContent)
+            orientation = LinearLayout.VERTICAL
+            padding = dip(8)
 
-        initData()
-    }
-
-    inner class MainActivityUI(val leagueItems: List<LeagueItems>) : AnkoComponent<MainActivity> {
-        override fun createView(ui: AnkoContext<MainActivity>) = with(ui) {
-            verticalLayout() {
+            relativeLayout {
                 lparams(width = matchParent, height = wrapContent)
 
-                recyclerView {
-                    layoutManager = GridLayoutManager(context, 2)
+                listLeague = recyclerView {
+                    layoutManager = LinearLayoutManager(context)
                     adapter =
                         LeagueAdapter(leagueItems) {
-                            startActivity<LeagueDetailActivity>(LeagueDetailActivity.EXTRA_LEAGUE_ITEM to it)
+                            startActivity<LeagueDetailActivity>(LeagueDetailActivity.EXTRA_LEAGUE_ID to it.id)
                         }
                 }
             }
         }
+
+        showLeague()
     }
 
-    private fun initData() {
+    private fun showLeague() {
+        val id = resources.getStringArray(R.array.league_id)
         val name = resources.getStringArray(R.array.league_name)
         val description = resources.getStringArray(R.array.description)
         val badge = resources.obtainTypedArray(R.array.league_badge)
@@ -44,6 +47,7 @@ class MainActivity : AppCompatActivity() {
         for (i in name.indices) {
             leagueItems.add(
                 LeagueItems(
+                    id[i],
                     name[i],
                     description[i],
                     badge.getResourceId(i, 0)
