@@ -10,7 +10,7 @@ import com.rmalan.app.footballleague.model.Events
 import java.text.ParseException
 import java.text.SimpleDateFormat
 
-class PreviousMatchAdapter (private val prevMatch: List<Events>)
+class PreviousMatchAdapter (private val prevMatch: List<Events>, private val listener: (Events) -> Unit)
     : RecyclerView.Adapter<PrevMatchViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PrevMatchViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_match, parent, false)
@@ -20,7 +20,7 @@ class PreviousMatchAdapter (private val prevMatch: List<Events>)
     override fun getItemCount(): Int = prevMatch.size
 
     override fun onBindViewHolder(holder: PrevMatchViewHolder, position: Int) {
-        holder.bindItem(prevMatch[position])
+        holder.bindItem(prevMatch[position], listener)
     }
 
 }
@@ -32,7 +32,7 @@ class PrevMatchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val awayTeam: TextView = view.findViewById(R.id.away_team)
     private val awayScore: TextView = view.findViewById(R.id.away_score)
 
-    fun bindItem(prevMatch: Events) {
+    fun bindItem(prevMatch: Events, listener: (Events) -> Unit) {
         val dateMatch: String? = prevMatch.dateEvent
         val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
         try {
@@ -48,5 +48,9 @@ class PrevMatchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         homeScore.text = prevMatch.homeScore
         awayTeam.text = prevMatch.awayTeam
         awayScore.text = prevMatch.awayScore
+
+        itemView.setOnClickListener {
+            listener(prevMatch)
+        }
     }
 }

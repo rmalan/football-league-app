@@ -11,6 +11,19 @@
     <string name="home_team">Home Team</string>
     <string name="vs">-</string>
     <string name="away_team">Away Team</string>
+    <string name="home_goal">Home Goal Details</string>
+    <string name="goals">Goals</string>
+    <string name="away_goal">Away Goal Details</string>
+    <string name="stats">STATS</string>
+    <string name="home_shots">Home Shots</string>
+    <string name="away_shots">Away Shots</string>
+    <string name="shots">Shots</string>
+    <string name="home_yellow">Home Yellow Cards</string>
+    <string name="yellow">Yellow Cards</string>
+    <string name="away_yellow">Away Yellow Cards</string>
+    <string name="home_red">Home Red Cards</string>
+    <string name="red">Red Cards</string>
+    <string name="away_red">Away Red Cards</string>
 
     <string-array name="league_id">
         <item>4328</item>

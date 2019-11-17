@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 
 import com.rmalan.app.footballleague.R
+import com.rmalan.app.footballleague.activity.EventDetailsActivity
 import com.rmalan.app.footballleague.adapter.NextMatchAdapter
 import com.rmalan.app.footballleague.adapter.PreviousMatchAdapter
 import com.rmalan.app.footballleague.api.ApiRepository
@@ -20,6 +21,7 @@ import com.rmalan.app.footballleague.presenter.NextMatchPresenter
 import com.rmalan.app.footballleague.view.NextMatchlView
 import kotlinx.android.synthetic.main.fragment_next_match.*
 import kotlinx.android.synthetic.main.fragment_previous_match.*
+import org.jetbrains.anko.support.v4.startActivity
 
 class NextMatchFragment : Fragment(), NextMatchlView {
 
@@ -39,7 +41,9 @@ class NextMatchFragment : Fragment(), NextMatchlView {
         preference = MyPreference(this.activity!!)
         rvNextMatch = view.findViewById(R.id.rv_next_match)
 
-        adapter = NextMatchAdapter(nextMatch)
+        adapter = NextMatchAdapter(nextMatch) {
+            startActivity<EventDetailsActivity>(EventDetailsActivity.EXTRA_EVENT_ID to it.eventId)
+        }
         rvNextMatch.adapter = adapter
         rvNextMatch.setHasFixedSize(true)
         rvNextMatch.layoutManager = LinearLayoutManager(this.activity)
