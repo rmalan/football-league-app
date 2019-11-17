@@ -1,10 +1,11 @@
-package com.rmalan.app.footballleague
+package com.rmalan.app.footballleague.activity
 
 import android.os.Bundle
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.rmalan.app.footballleague.R
 import com.rmalan.app.footballleague.adapter.LeagueAdapter
 import com.rmalan.app.footballleague.model.LeagueItems
 import org.jetbrains.anko.*
@@ -29,7 +30,8 @@ class MainActivity : AppCompatActivity() {
                     layoutManager = LinearLayoutManager(context)
                     adapter =
                         LeagueAdapter(leagueItems) {
-                            startActivity<LeagueDetailActivity>(LeagueDetailActivity.EXTRA_LEAGUE_ID to it.id)
+                            startActivity<LeagueDetailActivity>(
+                                LeagueDetailActivity.EXTRA_LEAGUE_ID to it.id)
                         }
                 }
             }

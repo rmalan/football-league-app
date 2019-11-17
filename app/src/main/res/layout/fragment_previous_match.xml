@@ -5,10 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".fragment.PreviousMatchFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_prev_match"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/tab_previous" />
+        android:layout_height="wrap_content" />
 
 </FrameLayout>

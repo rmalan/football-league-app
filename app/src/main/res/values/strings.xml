@@ -7,6 +7,10 @@
     <string name="league_fanart">League Fan Art</string>
     <string name="tab_previous">Previous Match</string>
     <string name="tab_next">Next Match</string>
+    <string name="date_event">Date Event</string>
+    <string name="home_team">Home Team</string>
+    <string name="vs">-</string>
+    <string name="away_team">Away Team</string>
 
     <string-array name="league_id">
         <item>4328</item>

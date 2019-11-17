@@ -1,13 +1,15 @@
-package com.rmalan.app.footballleague
+package com.rmalan.app.footballleague.activity
 
 import android.os.Bundle
 import android.util.Log
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
+import com.rmalan.app.footballleague.R
 import com.rmalan.app.footballleague.adapter.SectionsPagerAdapter
 import com.rmalan.app.footballleague.api.ApiRepository
 import com.rmalan.app.footballleague.model.LeagueDetail
+import com.rmalan.app.footballleague.preference.MyPreference
 import com.rmalan.app.footballleague.presenter.LeagueDetailPresenter
 import com.rmalan.app.footballleague.util.invisible
 import com.rmalan.app.footballleague.util.visible
@@ -24,6 +26,7 @@ class LeagueDetailActivity : AppCompatActivity(), LeagueDetailView {
     private var leagueDetail: MutableList<LeagueDetail> = mutableListOf()
     private lateinit var presenter: LeagueDetailPresenter
     private lateinit var progressBar: ProgressBar
+    private lateinit var preference: MyPreference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val leagueId = intent.getStringExtra(EXTRA_LEAGUE_ID)
@@ -38,6 +41,9 @@ class LeagueDetailActivity : AppCompatActivity(), LeagueDetailView {
         val gson = Gson()
         presenter = LeagueDetailPresenter(this, request, gson)
         presenter.getLeagueDetail(leagueId)
+
+        preference = MyPreference(this)
+        preference.setLeagueId(leagueId)
 
         val sectionPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
         view_pager.adapter = sectionPagerAdapter
