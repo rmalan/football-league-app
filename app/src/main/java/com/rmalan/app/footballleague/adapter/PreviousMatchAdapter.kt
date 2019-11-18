@@ -10,8 +10,10 @@ import com.rmalan.app.footballleague.model.Events
 import java.text.ParseException
 import java.text.SimpleDateFormat
 
-class PreviousMatchAdapter (private val prevMatch: List<Events>, private val listener: (Events) -> Unit)
-    : RecyclerView.Adapter<PrevMatchViewHolder>() {
+class PreviousMatchAdapter(
+    private val prevMatch: List<Events>,
+    private val listener: (Events) -> Unit
+) : RecyclerView.Adapter<PrevMatchViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PrevMatchViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_match, parent, false)
         return PrevMatchViewHolder(view)

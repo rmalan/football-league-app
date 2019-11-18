@@ -5,13 +5,12 @@ import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
 import android.widget.ProgressBar
 import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
-
 import com.rmalan.app.footballleague.R
 import com.rmalan.app.footballleague.activity.EventDetailsActivity
 import com.rmalan.app.footballleague.adapter.PreviousMatchAdapter
@@ -22,7 +21,6 @@ import com.rmalan.app.footballleague.presenter.PreviousMatchPresenter
 import com.rmalan.app.footballleague.util.invisible
 import com.rmalan.app.footballleague.util.visible
 import com.rmalan.app.footballleague.view.PreviousMatchlView
-import kotlinx.android.synthetic.main.fragment_previous_match.*
 import org.jetbrains.anko.support.v4.startActivity
 
 class PreviousMatchFragment : Fragment(), PreviousMatchlView {
@@ -96,6 +94,7 @@ class PreviousMatchFragment : Fragment(), PreviousMatchlView {
 
                 return true
             }
+
             override fun onQueryTextChange(newText: String): Boolean {
                 return false
             }

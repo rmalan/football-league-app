@@ -98,32 +98,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#f4f4f4"
+                android:elevation="8dp"
                 app:cardCornerRadius="4dp"
-                app:cardElevation="8dp"
-                android:elevation="8dp">
+                app:cardElevation="8dp">
 
                 <TextView
                     android:id="@+id/home_goal"
                     android:layout_width="125dp"
                     android:layout_height="wrap_content"
-                    android:gravity="start"
                     android:layout_gravity="start"
+                    android:gravity="start"
                     android:text="@string/home_goal"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_gravity="center"
-                    android:text="@string/goals"/>
+                    android:gravity="center"
+                    android:text="@string/goals" />
 
                 <TextView
                     android:id="@+id/away_goal"
                     android:layout_width="125dp"
                     android:layout_height="wrap_content"
-                    android:gravity="end"
                     android:layout_gravity="end"
+                    android:gravity="end"
                     android:text="@string/away_goal"
                     android:textStyle="bold" />
 
@@ -134,9 +134,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:padding="10dp"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -156,32 +156,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#f4f4f4"
+                android:elevation="8dp"
                 app:cardCornerRadius="4dp"
-                app:cardElevation="8dp"
-                android:elevation="8dp">
+                app:cardElevation="8dp">
 
                 <TextView
                     android:id="@+id/home_shot"
                     android:layout_width="125dp"
                     android:layout_height="wrap_content"
-                    android:gravity="start"
                     android:layout_gravity="start"
+                    android:gravity="start"
                     android:text="@string/home_shots"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_gravity="center"
-                    android:text="@string/shots"/>
+                    android:gravity="center"
+                    android:text="@string/shots" />
 
                 <TextView
                     android:id="@+id/away_shot"
                     android:layout_width="125dp"
                     android:layout_height="wrap_content"
-                    android:gravity="end"
                     android:layout_gravity="end"
+                    android:gravity="end"
                     android:text="@string/away_shots"
                     android:textStyle="bold" />
 
@@ -197,32 +197,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#f4f4f4"
+                android:elevation="8dp"
                 app:cardCornerRadius="4dp"
-                app:cardElevation="8dp"
-                android:elevation="8dp">
+                app:cardElevation="8dp">
 
                 <TextView
                     android:id="@+id/home_yellow"
                     android:layout_width="125dp"
                     android:layout_height="wrap_content"
-                    android:gravity="start"
                     android:layout_gravity="start"
+                    android:gravity="start"
                     android:text="@string/home_yellow"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_gravity="center"
-                    android:text="@string/yellow"/>
+                    android:gravity="center"
+                    android:text="@string/yellow" />
 
                 <TextView
                     android:id="@+id/away_yellow"
                     android:layout_width="125dp"
                     android:layout_height="wrap_content"
-                    android:gravity="end"
                     android:layout_gravity="end"
+                    android:gravity="end"
                     android:text="@string/away_yellow"
                     android:textStyle="bold" />
 
@@ -238,32 +238,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#f4f4f4"
+                android:elevation="8dp"
                 app:cardCornerRadius="4dp"
-                app:cardElevation="8dp"
-                android:elevation="8dp">
+                app:cardElevation="8dp">
 
                 <TextView
                     android:id="@+id/home_red"
                     android:layout_width="125dp"
                     android:layout_height="wrap_content"
-                    android:gravity="start"
                     android:layout_gravity="start"
+                    android:gravity="start"
                     android:text="@string/home_red"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_gravity="center"
-                    android:text="@string/red"/>
+                    android:gravity="center"
+                    android:text="@string/red" />
 
                 <TextView
                     android:id="@+id/away_red"
                     android:layout_width="125dp"
                     android:layout_height="wrap_content"
-                    android:gravity="end"
                     android:layout_gravity="end"
+                    android:gravity="end"
                     android:text="@string/away_red"
                     android:textStyle="bold" />
 

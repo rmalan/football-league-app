@@ -1,14 +1,9 @@
 package com.rmalan.app.footballleague.activity
 
-import android.app.SearchManager
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
 import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
 import com.google.gson.Gson
 import com.rmalan.app.footballleague.R
 import com.rmalan.app.footballleague.adapter.SectionsPagerAdapter
@@ -28,7 +23,6 @@ class LeagueDetailActivity : AppCompatActivity(), LeagueDetailView {
         const val EXTRA_LEAGUE_ID = "extra_league_id"
     }
 
-    private var leagueDetail: MutableList<LeagueDetail> = mutableListOf()
     private lateinit var presenter: LeagueDetailPresenter
     private lateinit var progressBar: ProgressBar
     private lateinit var preference: MyPreference

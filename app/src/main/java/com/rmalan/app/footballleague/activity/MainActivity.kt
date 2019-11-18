@@ -31,7 +31,8 @@ class MainActivity : AppCompatActivity() {
                     adapter =
                         LeagueAdapter(leagueItems) {
                             startActivity<LeagueDetailActivity>(
-                                LeagueDetailActivity.EXTRA_LEAGUE_ID to it.id)
+                                LeagueDetailActivity.EXTRA_LEAGUE_ID to it.id
+                            )
                         }
                 }
             }

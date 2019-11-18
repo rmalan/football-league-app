@@ -1,9 +1,9 @@
 package com.rmalan.app.footballleague.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ProgressBar
+import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
 import com.rmalan.app.footballleague.R
 import com.rmalan.app.footballleague.api.ApiRepository
@@ -22,7 +22,6 @@ class EventDetailsActivity : AppCompatActivity(), EventDetailsView {
         const val EXTRA_EVENT_ID = "extra_event_id"
     }
 
-    private var eventDetails: MutableList<EventDetails> = mutableListOf()
     private lateinit var presenter: EventDetailsPresenter
     private lateinit var progressBar: ProgressBar
 

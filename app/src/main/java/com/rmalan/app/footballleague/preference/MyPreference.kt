@@ -9,13 +9,13 @@ class MyPreference(context: Context) {
         val LEAGUE_ID = "league_id"
     }
 
-    val preferences = context.getSharedPreferences(PREFERENCE_NAME,Context.MODE_PRIVATE)
+    val preferences = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
 
-    fun getLeagueId() : String? {
+    fun getLeagueId(): String? {
         return preferences.getString(LEAGUE_ID, "")
     }
 
-    fun setLeagueId(leagueId : String?){
+    fun setLeagueId(leagueId: String?) {
         val editor = preferences.edit()
         editor.putString(LEAGUE_ID, leagueId)
         editor.apply()

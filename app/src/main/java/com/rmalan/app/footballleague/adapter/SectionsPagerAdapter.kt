@@ -10,7 +10,8 @@ import com.rmalan.app.footballleague.R
 import com.rmalan.app.footballleague.fragment.NextMatchFragment
 import com.rmalan.app.footballleague.fragment.PreviousMatchFragment
 
-class SectionsPagerAdapter(private val context: Context, fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+class SectionsPagerAdapter(private val context: Context, fragmentManager: FragmentManager) :
+    FragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     @StringRes
     private val TAB_TITLES = intArrayOf(R.string.tab_previous, R.string.tab_next)

@@ -5,9 +5,7 @@ import com.google.gson.Gson
 import com.rmalan.app.footballleague.api.ApiRepository
 import com.rmalan.app.footballleague.api.TheSportDBApi
 import com.rmalan.app.footballleague.model.EventDetailsResponse
-import com.rmalan.app.footballleague.model.LeagueDetailResponse
 import com.rmalan.app.footballleague.view.EventDetailsView
-import com.rmalan.app.footballleague.view.LeagueDetailView
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
