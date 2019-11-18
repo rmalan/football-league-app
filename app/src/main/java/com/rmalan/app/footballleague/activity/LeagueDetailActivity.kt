@@ -1,9 +1,14 @@
 package com.rmalan.app.footballleague.activity
 
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import com.google.gson.Gson
 import com.rmalan.app.footballleague.R
 import com.rmalan.app.footballleague.adapter.SectionsPagerAdapter
@@ -29,11 +34,12 @@ class LeagueDetailActivity : AppCompatActivity(), LeagueDetailView {
     private lateinit var preference: MyPreference
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val leagueId = intent.getStringExtra(EXTRA_LEAGUE_ID)
-        Log.d("tag", "id liga = ${leagueId}")
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_league_detail)
+
+        val leagueId = intent.getStringExtra(EXTRA_LEAGUE_ID)
+        Log.d("tag", "id liga = ${leagueId}")
 
         progressBar = findViewById(R.id.progress_bar)
 

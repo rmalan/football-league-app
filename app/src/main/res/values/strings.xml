@@ -24,6 +24,8 @@
     <string name="home_red">Home Red Cards</string>
     <string name="red">Red Cards</string>
     <string name="away_red">Away Red Cards</string>
+    <string name="search">Search</string>
+    <string name="search_hint">Search Match</string>
 
     <string-array name="league_id">
         <item>4328</item>
