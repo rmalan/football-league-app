@@ -69,7 +69,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/league_name"
-        tools:text="Est. Year" />
+        tools:text="@string/league_est" />
+
+    <ScrollView
+        android:id="@+id/scrollview_description"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tabs"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/league_fanart"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:id="@+id/league_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            tools:text="@string/league_description" />
+
+    </ScrollView>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
@@ -79,7 +99,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/league_fanart"
+        app:layout_constraintTop_toBottomOf="@+id/scrollview_description"
         app:layout_constraintVertical_bias="0.0" />
 
     <androidx.viewpager.widget.ViewPager

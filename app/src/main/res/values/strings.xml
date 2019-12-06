@@ -27,6 +27,7 @@
     <string name="search">Search</string>
     <string name="search_hint">Search Match</string>
     <string name="teams">Teams</string>
+    <string name="league_est">Est. Year</string>
 
     <string-array name="league_id">
         <item>4328</item>

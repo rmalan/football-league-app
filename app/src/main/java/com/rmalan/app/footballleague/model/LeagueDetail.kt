@@ -12,6 +12,9 @@ data class LeagueDetail(
     @SerializedName("strWebsite")
     var leagueWeb: String? = null,
 
+    @SerializedName("strDescriptionEN")
+    var leagueDescription: String? = null,
+
     @SerializedName("strBadge")
     var leagueBadge: String? = null,
 

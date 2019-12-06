@@ -57,14 +57,14 @@
                 android:id="@+id/img_home_team"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
+                android:layout_marginStart="-15dp"
                 android:contentDescription="@string/home_team"
                 tools:src="@color/colorAccent" />
 
             <TextView
                 android:id="@+id/home_score"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp" />
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -83,7 +83,6 @@
                 android:id="@+id/img_away_team"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
-                android:layout_marginStart="10dp"
                 android:contentDescription="@string/away_team"
                 tools:src="@color/colorAccent" />
 

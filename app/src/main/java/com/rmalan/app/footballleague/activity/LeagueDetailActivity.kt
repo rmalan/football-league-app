@@ -65,6 +65,7 @@ class LeagueDetailActivity : AppCompatActivity(), LeagueDetailView {
         Picasso.get().load(leagueDetail[0].leagueFanart).into(league_fanart)
         league_name.text = leagueDetail[0].leagueName
         league_est.text = "Est. ${leagueDetail[0].leagueFormed}"
+        league_description.text = leagueDetail[0].leagueDescription
     }
 
 }
