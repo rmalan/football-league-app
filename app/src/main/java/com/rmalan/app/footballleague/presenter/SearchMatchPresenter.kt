@@ -23,8 +23,12 @@ class SearchMatchPresenter(
             )
 
             uiThread {
-                view.showSearchMatch(data.event.filter { it.sport == "Soccer" })
-                Log.d("tag", "responsennya ${data.event.filter { it.sport == "Soccer" }}")
+                try {
+                    view.showSearchMatch(data.event.filter { it.sport == "Soccer" })
+                    Log.d("tag", "responsennya ${data.event.filter { it.sport == "Soccer" }}")
+                } catch(e: NullPointerException) {
+                    Log.d("tag", "null")
+                }
             }
         }
     }
