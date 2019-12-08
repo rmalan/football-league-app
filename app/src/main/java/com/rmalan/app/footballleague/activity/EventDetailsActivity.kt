@@ -1,12 +1,19 @@
 package com.rmalan.app.footballleague.activity
 
+import android.database.sqlite.SQLiteConstraintException
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
 import com.rmalan.app.footballleague.R
 import com.rmalan.app.footballleague.api.ApiRepository
+import com.rmalan.app.footballleague.db.database
 import com.rmalan.app.footballleague.model.EventDetails
+import com.rmalan.app.footballleague.model.Events
+import com.rmalan.app.footballleague.model.Favorite
 import com.rmalan.app.footballleague.model.TeamDetails
 import com.rmalan.app.footballleague.presenter.EventDetailsPresenter
 import com.rmalan.app.footballleague.util.invisible
@@ -14,6 +21,7 @@ import com.rmalan.app.footballleague.util.visible
 import com.rmalan.app.footballleague.view.EventDetailsView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_event_detail.*
+import org.jetbrains.anko.db.insert
 import java.text.ParseException
 import java.text.SimpleDateFormat
 
@@ -25,12 +33,20 @@ class EventDetailsActivity : AppCompatActivity(), EventDetailsView {
         const val EXTRA_AWAY_TEAM_ID = "extra_sesy_team_id"
     }
 
+    private lateinit var event: Events
+
     private lateinit var presenter: EventDetailsPresenter
     private lateinit var progressBar: ProgressBar
+
+    private var menuItem: Menu? = null
+    private var isFavorite: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_detail)
+
+        supportActionBar?.title = "Match Detail"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val eventId = intent.getStringExtra(EXTRA_EVENT_ID)
         val homeTeamId = intent.getStringExtra(EXTRA_HOME_TEAM_ID)
@@ -57,6 +73,7 @@ class EventDetailsActivity : AppCompatActivity(), EventDetailsView {
         homeTeamDetails: List<TeamDetails>,
         awayTeamDetails: List<TeamDetails>
     ) {
+        event = Events(eventDetails[0].eventId, null, homeTeamDetails[0].teamId, awayTeamDetails[0].teamId, eventDetails[0].homeTeam, eventDetails[0].awayTeam, eventDetails[0].homeScore, eventDetails[0].awayScore, eventDetails[0].dateEvent)
         league_name.text = eventDetails[0].leaggueName
 
         val dateMatch: String? = eventDetails[0].dateEvent
@@ -86,4 +103,42 @@ class EventDetailsActivity : AppCompatActivity(), EventDetailsView {
         away_red.text = eventDetails[0].awayRed
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.detail_menu, menu)
+        menuItem = menu
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            android.R.id.home -> {
+                finish()
+                true
+            }
+            R.id.add_to_favorite -> {
+                addToFavorite()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun addToFavorite() {
+        try {
+            database.use {
+                insert(Favorite.TABLE_FAVORITE,
+                    Favorite.EVENT_ID to event.eventId,
+                    Favorite.HOME_TEAM_ID to event.homeTeamId,
+                    Favorite.AWAY_TEAM_ID to event.awayTeamId,
+                    Favorite.HOME_TEAM to event.homeTeam,
+                    Favorite.AWAY_TEAM to event.awayTeam,
+                    Favorite.HOME_SCORE to event.homeScore,
+                    Favorite.AWAY_SCORE to event.awayScore,
+                    Favorite.DATE_EVENT to event.dateEvent)
+            }
+            Toast.makeText(applicationContext, "Added to favorite", Toast.LENGTH_SHORT).show()
+        } catch (e: SQLiteConstraintException) {
+            Toast.makeText(applicationContext, e.localizedMessage, Toast.LENGTH_SHORT).show()
+        }
+    }
 }

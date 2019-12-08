@@ -18,13 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activity.EventDetailsActivity"
-            android:parentActivityName=".activity.LeagueDetailActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.LeagueDetailActivity" />
-        </activity>
+        <activity android:name=".activity.EventDetailsActivity"></activity>
         <activity android:name=".activity.LeagueDetailActivity"></activity>
         <activity android:name=".activity.MainActivity"></activity>
     </application>

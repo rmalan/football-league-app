@@ -32,6 +32,9 @@ class LeagueDetailActivity : AppCompatActivity(), LeagueDetailView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_league_detail)
 
+        supportActionBar?.title = "Match Detail"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         val leagueId = intent.getStringExtra(EXTRA_LEAGUE_ID)
         Log.d("tag", "id liga = ${leagueId}")
 
