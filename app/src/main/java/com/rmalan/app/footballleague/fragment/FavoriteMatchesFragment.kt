@@ -15,6 +15,7 @@ import com.rmalan.app.footballleague.adapter.FavoriteMatchesAdapter
 import com.rmalan.app.footballleague.db.database
 import com.rmalan.app.footballleague.model.Favorite
 import org.jetbrains.anko.db.classParser
+import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.select
 import org.jetbrains.anko.support.v4.startActivity
 

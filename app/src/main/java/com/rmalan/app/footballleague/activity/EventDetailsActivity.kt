@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.google.gson.Gson
 import com.rmalan.app.footballleague.R
 import com.rmalan.app.footballleague.api.ApiRepository
@@ -21,7 +22,10 @@ import com.rmalan.app.footballleague.util.visible
 import com.rmalan.app.footballleague.view.EventDetailsView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_event_detail.*
+import org.jetbrains.anko.db.classParser
+import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.insert
+import org.jetbrains.anko.db.select
 import java.text.ParseException
 import java.text.SimpleDateFormat
 
@@ -40,6 +44,7 @@ class EventDetailsActivity : AppCompatActivity(), EventDetailsView {
 
     private var menuItem: Menu? = null
     private var isFavorite: Boolean = false
+    private lateinit var eventId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,11 +53,13 @@ class EventDetailsActivity : AppCompatActivity(), EventDetailsView {
         supportActionBar?.title = "Match Detail"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val eventId = intent.getStringExtra(EXTRA_EVENT_ID)
+        eventId = intent.getStringExtra(EXTRA_EVENT_ID)
         val homeTeamId = intent.getStringExtra(EXTRA_HOME_TEAM_ID)
         val awayTeamId = intent.getStringExtra(EXTRA_AWAY_TEAM_ID)
 
         progressBar = findViewById(R.id.progress_bar_event)
+
+        favoriteState()
 
         val request = ApiRepository()
         val gson = Gson()
@@ -106,6 +113,7 @@ class EventDetailsActivity : AppCompatActivity(), EventDetailsView {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.detail_menu, menu)
         menuItem = menu
+        setFavorite()
         return true
     }
 
@@ -116,7 +124,11 @@ class EventDetailsActivity : AppCompatActivity(), EventDetailsView {
                 true
             }
             R.id.add_to_favorite -> {
-                addToFavorite()
+                if (isFavorite) removeFromFavorite() else addToFavorite()
+
+                isFavorite = !isFavorite
+                setFavorite()
+
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -139,6 +151,35 @@ class EventDetailsActivity : AppCompatActivity(), EventDetailsView {
             Toast.makeText(applicationContext, "Added to favorite", Toast.LENGTH_SHORT).show()
         } catch (e: SQLiteConstraintException) {
             Toast.makeText(applicationContext, e.localizedMessage, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun removeFromFavorite() {
+        try {
+            database.use {
+                delete(Favorite.TABLE_FAVORITE, "(EVENT_ID = {id})",
+                    "id" to eventId)
+            }
+            Toast.makeText(applicationContext, "Removed from favorite", Toast.LENGTH_SHORT).show()
+        } catch (e: SQLiteConstraintException) {
+            Toast.makeText(applicationContext, e.localizedMessage, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun setFavorite() {
+        if (isFavorite)
+            menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_added_to_favorites)
+        else
+            menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_add_to_favorites)
+    }
+
+    private fun favoriteState() {
+        database.use {
+            val result = select(Favorite.TABLE_FAVORITE)
+                .whereArgs("EVENT_ID = {id}",
+                    "id" to eventId)
+            val favorite = result.parseList(classParser<Favorite>())
+            if (!favorite.isEmpty()) isFavorite = true
         }
     }
 }
