@@ -26,7 +26,7 @@ class SearchMatchPresenter(
                 try {
                     view.showSearchMatch(data.event.filter { it.sport == "Soccer" })
                     Log.d("tag", "responsennya ${data.event.filter { it.sport == "Soccer" }}")
-                } catch(e: NullPointerException) {
+                } catch (e: NullPointerException) {
                     Log.d("tag", "null")
                 }
             }

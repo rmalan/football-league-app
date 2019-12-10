@@ -4,9 +4,9 @@
     <item
         android:id="@+id/leagues"
         android:enabled="true"
-        android:title="@string/leagues"
         android:icon="@drawable/ic_leagues"
-        app:showAsAction="ifRoom"/>
+        android:title="@string/leagues"
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/favorites"

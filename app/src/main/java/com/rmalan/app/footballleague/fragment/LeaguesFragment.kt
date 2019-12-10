@@ -4,13 +4,12 @@ import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
 import android.widget.LinearLayout
 import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
-
 import com.rmalan.app.footballleague.R
 import com.rmalan.app.footballleague.activity.EventDetailsActivity
 import com.rmalan.app.footballleague.activity.LeagueDetailActivity
@@ -39,7 +38,11 @@ class LeaguesFragment : Fragment(), AnkoComponent<Context>, SearchMatchlView {
         showLeague()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return createView(AnkoContext.Companion.create(requireContext()))
     }
 

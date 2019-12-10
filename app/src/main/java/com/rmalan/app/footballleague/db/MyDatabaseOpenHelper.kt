@@ -5,7 +5,8 @@ import android.database.sqlite.SQLiteDatabase
 import com.rmalan.app.footballleague.model.Favorite
 import org.jetbrains.anko.db.*
 
-class MyDatabaseOpenHelper (ctx: Context) : ManagedSQLiteOpenHelper(ctx, "FavoriteMatch.db", null, 1) {
+class MyDatabaseOpenHelper(ctx: Context) :
+    ManagedSQLiteOpenHelper(ctx, "FavoriteMatch.db", null, 1) {
     companion object {
         private var instance: MyDatabaseOpenHelper? = null
 
@@ -19,7 +20,8 @@ class MyDatabaseOpenHelper (ctx: Context) : ManagedSQLiteOpenHelper(ctx, "Favori
     }
 
     override fun onCreate(db: SQLiteDatabase) {
-        db.createTable(Favorite.TABLE_FAVORITE, true,
+        db.createTable(
+            Favorite.TABLE_FAVORITE, true,
             Favorite.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
             Favorite.EVENT_ID to TEXT + UNIQUE,
             Favorite.HOME_TEAM_ID to TEXT + UNIQUE,
@@ -28,7 +30,8 @@ class MyDatabaseOpenHelper (ctx: Context) : ManagedSQLiteOpenHelper(ctx, "Favori
             Favorite.AWAY_TEAM to TEXT,
             Favorite.HOME_SCORE to TEXT,
             Favorite.AWAY_SCORE to TEXT,
-            Favorite.DATE_EVENT to TEXT)
+            Favorite.DATE_EVENT to TEXT
+        )
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
@@ -37,4 +40,4 @@ class MyDatabaseOpenHelper (ctx: Context) : ManagedSQLiteOpenHelper(ctx, "Favori
 }
 
 val Context.database: MyDatabaseOpenHelper
-get() = MyDatabaseOpenHelper.getInstance(applicationContext)
+    get() = MyDatabaseOpenHelper.getInstance(applicationContext)

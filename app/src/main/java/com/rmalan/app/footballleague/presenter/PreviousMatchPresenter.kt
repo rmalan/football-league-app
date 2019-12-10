@@ -23,8 +23,12 @@ class PreviousMatchPresenter(
             )
 
             uiThread {
-                view.showPrevMatch(data.events)
-                Log.d("tag", "responsennya ${data.events}")
+                if (data.events != null) {
+                    view.showPrevMatch(data.events)
+                    Log.d("tag", "responsennya ${data.events}")
+                } else {
+                    Log.d("tag", "responsennya ${data.events}")
+                }
             }
         }
     }

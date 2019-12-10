@@ -39,7 +39,7 @@ class NextMatchFragment : Fragment(), NextMatchlView {
 
         progressBar = view.findViewById(R.id.progress_bar_next)
 
-        preference = MyPreference(this.activity!!)
+        preference = MyPreference(requireActivity())
         rvNextMatch = view.findViewById(R.id.rv_next_match)
 
         adapter = MatchAdapter(nextMatch) {

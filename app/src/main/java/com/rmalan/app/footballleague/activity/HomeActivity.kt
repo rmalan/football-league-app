@@ -1,13 +1,13 @@
 package com.rmalan.app.footballleague.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.rmalan.app.footballleague.R
-import kotlinx.android.synthetic.main.activity_home.*
-import com.rmalan.app.footballleague.R.id.leagues
 import com.rmalan.app.footballleague.R.id.favorites
+import com.rmalan.app.footballleague.R.id.leagues
 import com.rmalan.app.footballleague.fragment.FavoriteMatchesFragment
 import com.rmalan.app.footballleague.fragment.LeaguesFragment
+import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
 
@@ -33,7 +33,11 @@ class HomeActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.main_container, LeaguesFragment(), LeaguesFragment::class.java.simpleName)
+                .replace(
+                    R.id.main_container,
+                    LeaguesFragment(),
+                    LeaguesFragment::class.java.simpleName
+                )
                 .commit()
         }
     }
@@ -42,7 +46,11 @@ class HomeActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.main_container, FavoriteMatchesFragment(), FavoriteMatchesFragment::class.java.simpleName)
+                .replace(
+                    R.id.main_container,
+                    FavoriteMatchesFragment(),
+                    FavoriteMatchesFragment::class.java.simpleName
+                )
                 .commit()
         }
     }

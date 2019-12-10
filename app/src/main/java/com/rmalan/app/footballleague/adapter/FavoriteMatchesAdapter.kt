@@ -10,8 +10,10 @@ import com.rmalan.app.footballleague.model.Favorite
 import java.text.ParseException
 import java.text.SimpleDateFormat
 
-class FavoriteMatchesAdapter(private val favorite: List<Favorite>, private val listener: (Favorite) -> Unit)
-    : RecyclerView.Adapter<FavoriteViewHolder>() {
+class FavoriteMatchesAdapter(
+    private val favorite: List<Favorite>,
+    private val listener: (Favorite) -> Unit
+) : RecyclerView.Adapter<FavoriteViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_match, parent, false)

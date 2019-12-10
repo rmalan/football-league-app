@@ -2,20 +2,18 @@ package com.rmalan.app.footballleague.fragment
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
 import com.rmalan.app.footballleague.R
 import com.rmalan.app.footballleague.activity.EventDetailsActivity
 import com.rmalan.app.footballleague.adapter.FavoriteMatchesAdapter
 import com.rmalan.app.footballleague.db.database
 import com.rmalan.app.footballleague.model.Favorite
 import org.jetbrains.anko.db.classParser
-import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.select
 import org.jetbrains.anko.support.v4.startActivity
 
@@ -25,7 +23,11 @@ class FavoriteMatchesFragment : Fragment() {
     private lateinit var adapter: FavoriteMatchesAdapter
     private lateinit var rvFavoriteMathces: RecyclerView
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_favorite_matches, container, false)
     }
 

@@ -39,7 +39,7 @@ class PreviousMatchFragment : Fragment(), PreviousMatchlView {
 
         progressBar = view.findViewById(R.id.progress_bar_prev)
 
-        preference = MyPreference(this.activity!!)
+        preference = MyPreference(requireActivity())
         rvPrevMatch = view.findViewById(R.id.rv_prev_match)
 
         adapter = MatchAdapter(prevMatch) {

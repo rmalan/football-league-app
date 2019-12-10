@@ -80,7 +80,17 @@ class EventDetailsActivity : AppCompatActivity(), EventDetailsView {
         homeTeamDetails: List<TeamDetails>,
         awayTeamDetails: List<TeamDetails>
     ) {
-        event = Events(eventDetails[0].eventId, null, homeTeamDetails[0].teamId, awayTeamDetails[0].teamId, eventDetails[0].homeTeam, eventDetails[0].awayTeam, eventDetails[0].homeScore, eventDetails[0].awayScore, eventDetails[0].dateEvent)
+        event = Events(
+            eventDetails[0].eventId,
+            null,
+            homeTeamDetails[0].teamId,
+            awayTeamDetails[0].teamId,
+            eventDetails[0].homeTeam,
+            eventDetails[0].awayTeam,
+            eventDetails[0].homeScore,
+            eventDetails[0].awayScore,
+            eventDetails[0].dateEvent
+        )
         league_name.text = eventDetails[0].leaggueName
 
         val dateMatch: String? = eventDetails[0].dateEvent
@@ -118,16 +128,23 @@ class EventDetailsActivity : AppCompatActivity(), EventDetailsView {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
+        return when (item.itemId) {
             android.R.id.home -> {
                 finish()
                 true
             }
             R.id.add_to_favorite -> {
-                if (isFavorite) removeFromFavorite() else addToFavorite()
-
-                isFavorite = !isFavorite
-                setFavorite()
+                if (::event.isInitialized) {
+                    if (isFavorite) removeFromFavorite() else addToFavorite()
+                    isFavorite = !isFavorite
+                    setFavorite()
+                } else {
+                    Toast.makeText(
+                        applicationContext,
+                        "Please wait, loading data...",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
 
                 true
             }
@@ -138,7 +155,8 @@ class EventDetailsActivity : AppCompatActivity(), EventDetailsView {
     private fun addToFavorite() {
         try {
             database.use {
-                insert(Favorite.TABLE_FAVORITE,
+                insert(
+                    Favorite.TABLE_FAVORITE,
                     Favorite.EVENT_ID to event.eventId,
                     Favorite.HOME_TEAM_ID to event.homeTeamId,
                     Favorite.AWAY_TEAM_ID to event.awayTeamId,
@@ -146,7 +164,8 @@ class EventDetailsActivity : AppCompatActivity(), EventDetailsView {
                     Favorite.AWAY_TEAM to event.awayTeam,
                     Favorite.HOME_SCORE to event.homeScore,
                     Favorite.AWAY_SCORE to event.awayScore,
-                    Favorite.DATE_EVENT to event.dateEvent)
+                    Favorite.DATE_EVENT to event.dateEvent
+                )
             }
             Toast.makeText(applicationContext, "Added to favorite", Toast.LENGTH_SHORT).show()
         } catch (e: SQLiteConstraintException) {
@@ -157,8 +176,10 @@ class EventDetailsActivity : AppCompatActivity(), EventDetailsView {
     private fun removeFromFavorite() {
         try {
             database.use {
-                delete(Favorite.TABLE_FAVORITE, "(EVENT_ID = {id})",
-                    "id" to eventId)
+                delete(
+                    Favorite.TABLE_FAVORITE, "(EVENT_ID = {id})",
+                    "id" to eventId
+                )
             }
             Toast.makeText(applicationContext, "Removed from favorite", Toast.LENGTH_SHORT).show()
         } catch (e: SQLiteConstraintException) {
@@ -168,16 +189,20 @@ class EventDetailsActivity : AppCompatActivity(), EventDetailsView {
 
     private fun setFavorite() {
         if (isFavorite)
-            menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_added_to_favorites)
+            menuItem?.getItem(0)?.icon =
+                ContextCompat.getDrawable(this, R.drawable.ic_added_to_favorites)
         else
-            menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_add_to_favorites)
+            menuItem?.getItem(0)?.icon =
+                ContextCompat.getDrawable(this, R.drawable.ic_add_to_favorites)
     }
 
     private fun favoriteState() {
         database.use {
             val result = select(Favorite.TABLE_FAVORITE)
-                .whereArgs("EVENT_ID = {id}",
-                    "id" to eventId)
+                .whereArgs(
+                    "EVENT_ID = {id}",
+                    "id" to eventId
+                )
             val favorite = result.parseList(classParser<Favorite>())
             if (!favorite.isEmpty()) isFavorite = true
         }
