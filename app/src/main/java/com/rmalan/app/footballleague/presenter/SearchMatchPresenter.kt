@@ -5,30 +5,30 @@ import com.google.gson.Gson
 import com.rmalan.app.footballleague.api.ApiRepository
 import com.rmalan.app.footballleague.api.TheSportDBApi
 import com.rmalan.app.footballleague.model.SearchResponse
+import com.rmalan.app.footballleague.util.CoroutineContextProvider
 import com.rmalan.app.footballleague.view.SearchMatchlView
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class SearchMatchPresenter(
     private val view: SearchMatchlView,
     private val apiRepository: ApiRepository,
-    private val gson: Gson
+    private val gson: Gson,
+    private val context: CoroutineContextProvider = CoroutineContextProvider()
 ) {
     fun getSearchEvents(query: String?) {
-        doAsync {
+        GlobalScope.launch(context.main) {
             val data = gson.fromJson(
                 apiRepository
-                    .doRequest(TheSportDBApi.getSearchEvents(query)),
+                    .doRequest(TheSportDBApi.getSearchEvents(query)).await(),
                 SearchResponse::class.java
             )
 
-            uiThread {
-                try {
-                    view.showSearchMatch(data.event.filter { it.sport == "Soccer" })
-                    Log.d("tag", "responsennya ${data.event.filter { it.sport == "Soccer" }}")
-                } catch (e: NullPointerException) {
-                    Log.d("tag", "null")
-                }
+            try {
+                view.showSearchMatch(data.event.filter { it.sport == "Soccer" })
+                Log.d("tag", "responsennya ${data.event.filter { it.sport == "Soccer" }}")
+            } catch (e: NullPointerException) {
+                Log.d("tag", "null")
             }
         }
     }
