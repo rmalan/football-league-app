@@ -5,8 +5,8 @@ import android.content.Context
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class MyPreference(context: Context) {
     companion object {
-        val PREFERENCE_NAME = "MyPreference"
-        val LEAGUE_ID = "league_id"
+        const val PREFERENCE_NAME = "MyPreference"
+        const val LEAGUE_ID = "league_id"
     }
 
     val preferences = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)

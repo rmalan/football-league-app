@@ -204,7 +204,7 @@ class EventDetailsActivity : AppCompatActivity(), EventDetailsView {
                     "id" to eventId
                 )
             val favorite = result.parseList(classParser<Favorite>())
-            if (!favorite.isEmpty()) isFavorite = true
+            if (favorite.isNotEmpty()) isFavorite = true
         }
     }
 }

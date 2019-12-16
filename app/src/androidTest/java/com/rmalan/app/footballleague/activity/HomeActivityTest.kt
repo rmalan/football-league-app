@@ -24,12 +24,11 @@ class HomeActivityTest {
 
     @Test
     fun searchMatchTest() {
-        Thread.sleep(300)
         onView(withId(R.id.search)).check(ViewAssertions.matches(isDisplayed()))
         onView(withId(R.id.search)).perform(click())
         Thread.sleep(300)
         onView(withId(R.id.search_src_text)).perform(
-            replaceText("Liverpool"),
+            typeText("Liverpool"),
             pressKey(KeyEvent.KEYCODE_ENTER)
         )
         Thread.sleep(3000)

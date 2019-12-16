@@ -30,8 +30,8 @@ class LeagueAdapter(
 
     class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView),
         LayoutContainer {
-        val badge = itemView.findViewById<ImageView>(R.id.league_badge)
-        val name = itemView.findViewById<TextView>(R.id.league_name)
+        private val badge: ImageView = itemView.findViewById(R.id.league_badge)
+        private val name: TextView = itemView.findViewById(R.id.league_name)
 
         fun bindItem(items: LeagueItems, listener: (LeagueItems) -> Unit) {
             items.badge?.let { Picasso.get().load(it).fit().into(badge) }
