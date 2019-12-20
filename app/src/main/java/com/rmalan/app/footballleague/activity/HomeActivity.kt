@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.rmalan.app.footballleague.R
 import com.rmalan.app.footballleague.R.id.favorites
 import com.rmalan.app.footballleague.R.id.leagues
+import com.rmalan.app.footballleague.fragment.FavoriteFragment
 import com.rmalan.app.footballleague.fragment.FavoriteMatchesFragment
 import com.rmalan.app.footballleague.fragment.LeaguesFragment
 import kotlinx.android.synthetic.main.activity_home.*
@@ -21,7 +22,7 @@ class HomeActivity : AppCompatActivity() {
                     loadLeaguesFragment(savedInstanceState)
                 }
                 favorites -> {
-                    loadFavoriteMatchesFragment(savedInstanceState)
+                    loadFavoriteFragment(savedInstanceState)
                 }
             }
             true
@@ -42,14 +43,14 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadFavoriteMatchesFragment(savedInstanceState: Bundle?) {
+    private fun loadFavoriteFragment(savedInstanceState: Bundle?) {
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
                 .replace(
                     R.id.main_container,
-                    FavoriteMatchesFragment(),
-                    FavoriteMatchesFragment::class.java.simpleName
+                    FavoriteFragment(),
+                    FavoriteFragment::class.java.simpleName
                 )
                 .commit()
         }
