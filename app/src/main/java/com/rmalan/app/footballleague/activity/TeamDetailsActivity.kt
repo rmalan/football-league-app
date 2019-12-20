@@ -1,14 +1,13 @@
 package com.rmalan.app.footballleague.activity
 
+import android.database.sqlite.SQLiteConstraintException
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Gravity
 import android.view.Menu
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.view.MenuItem
+import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.dicoding.picodiploma.myfootballclub.Team
@@ -17,6 +16,8 @@ import com.rmalan.app.footballleague.R
 import com.rmalan.app.footballleague.R.color.colorAccent
 import com.rmalan.app.footballleague.R.color.colorPrimaryDark
 import com.rmalan.app.footballleague.api.ApiRepository
+import com.rmalan.app.footballleague.db.database
+import com.rmalan.app.footballleague.model.FavoriteTeam
 import com.rmalan.app.footballleague.model.TeamDetails
 import com.rmalan.app.footballleague.presenter.TeamDetailsPresenter
 import com.rmalan.app.footballleague.util.invisible
@@ -24,6 +25,11 @@ import com.rmalan.app.footballleague.util.visible
 import com.rmalan.app.footballleague.view.TeamDetailsView
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.*
+import org.jetbrains.anko.db.classParser
+import org.jetbrains.anko.db.delete
+import org.jetbrains.anko.db.insert
+import org.jetbrains.anko.db.select
+import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
 
@@ -45,6 +51,9 @@ class TeamDetailsActivity : AppCompatActivity(), TeamDetailsView {
     private lateinit var teamDescription: TextView
 
     private lateinit var teamId: String
+
+    private var menuItem: Menu? = null
+    private var isFavorite: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -108,7 +117,7 @@ class TeamDetailsActivity : AppCompatActivity(), TeamDetailsView {
             }
         }
 
-//        FavoriteState()
+        FavoriteState()
         val request = ApiRepository()
         val gson = Gson()
         presenter = TeamDetailsPresenter(this, request, gson)
@@ -135,5 +144,80 @@ class TeamDetailsActivity : AppCompatActivity(), TeamDetailsView {
         teamDescription.text = data[0].teamDescription
         teamFormedYear.text = data[0].teamFormedYear
         teamStadium.text = data[0].teamStadium
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.detail_menu, menu)
+        menuItem = menu
+        setFavorite()
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+                true
+            }
+            R.id.add_to_favorite -> {
+                if (::team.isInitialized) {
+                    if (isFavorite) removeFromFavorite() else addToFavorite()
+                    isFavorite = !isFavorite
+                    setFavorite()
+                } else {
+                    Toast.makeText(
+                        applicationContext,
+                        "Please wait, loading data...",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun addToFavorite() {
+        try {
+            database.use {
+                insert(FavoriteTeam.TABLE_FAVORITE_TEAM,
+                    FavoriteTeam.TEAM_ID to team.teamId,
+                    FavoriteTeam.TEAM_NAME to team.teamName,
+                    FavoriteTeam.TEAM_BADGE to team.teamBadge)
+            }
+            swipeRefresh.snackbar("Added to favorite").show()
+        } catch (e: SQLiteConstraintException) {
+            swipeRefresh.snackbar(e.localizedMessage).show()
+        }
+    }
+
+    private fun removeFromFavorite(){
+        try {
+            database.use {
+                delete(FavoriteTeam.TABLE_FAVORITE_TEAM, "(TEAM_ID = {id})",
+                    "id" to teamId)
+            }
+            swipeRefresh.snackbar( "Removed to favorite").show()
+        } catch (e: SQLiteConstraintException){
+            swipeRefresh.snackbar(e.localizedMessage).show()
+        }
+    }
+
+    private fun setFavorite() {
+        if (isFavorite)
+            menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_added_to_favorites)
+        else
+            menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_add_to_favorites)
+    }
+
+    private fun FavoriteState() {
+        database.use {
+            val result = select(FavoriteTeam.TABLE_FAVORITE_TEAM)
+                .whereArgs("(TEAM_ID = {id})",
+                    "id" to teamId)
+            val favorite = result.parseList(classParser<FavoriteTeam>())
+            if (favorite.isNotEmpty()) isFavorite = true
+        }
     }
 }
