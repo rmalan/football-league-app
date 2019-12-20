@@ -78,7 +78,7 @@ class LeaguesFragment : Fragment(), AnkoComponent<Context>, SearchMatchlView {
         searchView.queryHint = resources.getString(R.string.search_hint)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                listLeague = activity!!.recyclerView {
+                listLeague = requireActivity().recyclerView {
                     layoutManager = LinearLayoutManager(context)
                     adapter =
                         MatchAdapter(searchMatch) {
