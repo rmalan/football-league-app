@@ -9,14 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.ProgressBar
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.dicoding.picodiploma.myfootballclub.Team
 import com.google.gson.Gson
 import com.rmalan.app.footballleague.R
-import com.rmalan.app.footballleague.TeamDetailActivity
+import com.rmalan.app.footballleague.activity.TeamDetailsActivity
 import com.rmalan.app.footballleague.adapter.TeamsAdapter
 import com.rmalan.app.footballleague.api.ApiRepository
 import com.rmalan.app.footballleague.preference.MyPreference
@@ -45,7 +44,9 @@ class TeamsFragment : Fragment(), AnkoComponent<Context>, TeamsView {
         preference = MyPreference(requireActivity())
 
         adapter = TeamsAdapter(teams) {
-            context?.startActivity<TeamDetailActivity>("id" to "${it.teamId}")
+            context?.startActivity<TeamDetailsActivity>(
+                TeamDetailsActivity.EXTRA_TEAM_ID to it.teamId
+            )
         }
         listTeam.adapter = adapter
 
