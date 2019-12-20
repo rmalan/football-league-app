@@ -6,6 +6,9 @@ data class Team (
     @SerializedName("idTeam")
     var teamId: String? = null,
 
+    @SerializedName("strSport")
+    var sport: String? = null,
+
     @SerializedName("strTeam")
     var teamName: String? = null,
 

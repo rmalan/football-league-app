@@ -34,4 +34,23 @@ class TeamsPresenter(private val view: TeamsView,
 
         }
     }
+
+    fun getSearchTeams(query: String?) {
+        view.showLoading()
+
+        GlobalScope.launch(context.main) {
+            val data = gson.fromJson(
+                apiRepository
+                    .doRequest(TheSportDBApi.getSearchTeams(query)).await(),
+                TeamResponse::class.java
+            )
+
+            try {
+                view.showTeamList(data.teams.filter { it.sport == "Soccer" })
+                Log.d("tag", "responsennya ${data.teams.filter { it.sport == "Soccer" }}")
+            } catch (e: NullPointerException) {
+                Log.d("tag", "null")
+            }
+        }
+    }
 }

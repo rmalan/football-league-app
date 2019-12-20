@@ -30,4 +30,8 @@ object TheSportDBApi {
     fun getSearchEvents(query: String?): String {
         return BuildConfig.BASE_URL + "api/v1/json/${BuildConfig.TSDB_API_KEY}" + "/searchevents.php?e=" + query
     }
+
+    fun getSearchTeams(query: String?): String {
+        return BuildConfig.BASE_URL + "api/v1/json/${BuildConfig.TSDB_API_KEY}" + "/searchteams.php?t=" + query
+    }
 }
