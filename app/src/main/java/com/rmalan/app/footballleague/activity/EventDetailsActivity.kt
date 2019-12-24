@@ -28,6 +28,7 @@ import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
 import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.util.*
 
 class EventDetailsActivity : AppCompatActivity(), EventDetailsView {
 
@@ -94,7 +95,7 @@ class EventDetailsActivity : AppCompatActivity(), EventDetailsView {
         league_name.text = eventDetails[0].leaggueName
 
         val dateMatch: String? = eventDetails[0].dateEvent
-        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
+        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         try {
             val date = simpleDateFormat.parse(dateMatch)
             val newFormat = SimpleDateFormat("EE, MM/dd")

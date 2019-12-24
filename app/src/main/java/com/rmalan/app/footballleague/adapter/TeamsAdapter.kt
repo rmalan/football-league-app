@@ -11,8 +11,8 @@ import com.rmalan.app.footballleague.R
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.*
 
-class TeamsAdapter(private val teams: List<Team>, private var listener: (Team) -> Unit)
-    : RecyclerView.Adapter<TeamViewHolder>() {
+class TeamsAdapter(private val teams: List<Team>, private var listener: (Team) -> Unit) :
+    RecyclerView.Adapter<TeamViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamViewHolder {
         return TeamViewHolder(TeamUI().createView(AnkoContext.create(parent.context, parent)))
@@ -36,7 +36,7 @@ class TeamUI : AnkoComponent<ViewGroup> {
 
                 imageView {
                     id = R.id.team_badge
-                }.lparams{
+                }.lparams {
                     height = dip(50)
                     width = dip(50)
                 }
@@ -44,7 +44,7 @@ class TeamUI : AnkoComponent<ViewGroup> {
                 textView {
                     id = R.id.team_name
                     textSize = 16f
-                }.lparams{
+                }.lparams {
                     margin = dip(15)
                 }
 
@@ -54,7 +54,7 @@ class TeamUI : AnkoComponent<ViewGroup> {
 
 }
 
-class TeamViewHolder(view: View) : RecyclerView.ViewHolder(view){
+class TeamViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val teamBadge: ImageView = view.find(R.id.team_badge)
     private val teamName: TextView = view.find(R.id.team_name)

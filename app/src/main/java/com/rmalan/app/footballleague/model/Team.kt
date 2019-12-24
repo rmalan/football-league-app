@@ -2,7 +2,7 @@ package com.dicoding.picodiploma.myfootballclub
 
 import com.google.gson.annotations.SerializedName
 
-data class Team (
+data class Team(
     @SerializedName("idTeam")
     var teamId: String? = null,
 

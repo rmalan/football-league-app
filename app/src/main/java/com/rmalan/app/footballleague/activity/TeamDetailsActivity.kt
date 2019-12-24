@@ -2,12 +2,12 @@ package com.rmalan.app.footballleague.activity
 
 import android.database.sqlite.SQLiteConstraintException
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.dicoding.picodiploma.myfootballclub.Team
@@ -69,10 +69,12 @@ class TeamDetailsActivity : AppCompatActivity(), TeamDetailsView {
             backgroundColor = Color.WHITE
 
             swipeRefresh = swipeRefreshLayout {
-                setColorSchemeResources(colorAccent,
+                setColorSchemeResources(
+                    colorAccent,
                     android.R.color.holo_green_light,
                     android.R.color.holo_orange_light,
-                    android.R.color.holo_red_light)
+                    android.R.color.holo_red_light
+                )
 
                 scrollView {
                     isVerticalScrollBarEnabled = false
@@ -85,7 +87,7 @@ class TeamDetailsActivity : AppCompatActivity(), TeamDetailsView {
                             orientation = LinearLayout.VERTICAL
                             gravity = Gravity.CENTER_HORIZONTAL
 
-                            teamBadge = imageView{}.lparams(height = dip(75))
+                            teamBadge = imageView {}.lparams(height = dip(75))
                             teamName = textView {
                                 this.gravity = Gravity.CENTER
                                 textSize = 20f
@@ -93,16 +95,16 @@ class TeamDetailsActivity : AppCompatActivity(), TeamDetailsView {
                             }.lparams {
                                 topMargin = dip(5)
                             }
-                            teamFormedYear = textView{
+                            teamFormedYear = textView {
                                 this.gravity = Gravity.CENTER
                             }
 
-                            teamStadium = textView{
+                            teamStadium = textView {
                                 this.gravity = Gravity.CENTER
                                 textColor = ContextCompat.getColor(context, colorPrimaryDark)
                             }
 
-                            teamDescription = textView().lparams{
+                            teamDescription = textView().lparams {
                                 topMargin = dip(20)
                             }
                         }
@@ -137,7 +139,7 @@ class TeamDetailsActivity : AppCompatActivity(), TeamDetailsView {
     }
 
     override fun showTeamDetails(data: List<TeamDetails>) {
-        team = Team(data[0].teamId, data[0].teamName, data[0].teamBadge)
+        team = Team(data[0].teamId, "Soccer", data[0].teamName, data[0].teamBadge)
         swipeRefresh.isRefreshing = false
         Picasso.get().load(data[0].teamBadge).into(teamBadge)
         teamName.text = data[0].teamName
@@ -181,10 +183,12 @@ class TeamDetailsActivity : AppCompatActivity(), TeamDetailsView {
     private fun addToFavorite() {
         try {
             database.use {
-                insert(FavoriteTeam.TABLE_FAVORITE_TEAM,
+                insert(
+                    FavoriteTeam.TABLE_FAVORITE_TEAM,
                     FavoriteTeam.TEAM_ID to team.teamId,
                     FavoriteTeam.TEAM_NAME to team.teamName,
-                    FavoriteTeam.TEAM_BADGE to team.teamBadge)
+                    FavoriteTeam.TEAM_BADGE to team.teamBadge
+                )
             }
             swipeRefresh.snackbar("Added to favorite").show()
         } catch (e: SQLiteConstraintException) {
@@ -192,30 +196,36 @@ class TeamDetailsActivity : AppCompatActivity(), TeamDetailsView {
         }
     }
 
-    private fun removeFromFavorite(){
+    private fun removeFromFavorite() {
         try {
             database.use {
-                delete(FavoriteTeam.TABLE_FAVORITE_TEAM, "(TEAM_ID = {id})",
-                    "id" to teamId)
+                delete(
+                    FavoriteTeam.TABLE_FAVORITE_TEAM, "(TEAM_ID = {id})",
+                    "id" to teamId
+                )
             }
-            swipeRefresh.snackbar( "Removed to favorite").show()
-        } catch (e: SQLiteConstraintException){
+            swipeRefresh.snackbar("Removed to favorite").show()
+        } catch (e: SQLiteConstraintException) {
             swipeRefresh.snackbar(e.localizedMessage).show()
         }
     }
 
     private fun setFavorite() {
         if (isFavorite)
-            menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_added_to_favorites)
+            menuItem?.getItem(0)?.icon =
+                ContextCompat.getDrawable(this, R.drawable.ic_added_to_favorites)
         else
-            menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_add_to_favorites)
+            menuItem?.getItem(0)?.icon =
+                ContextCompat.getDrawable(this, R.drawable.ic_add_to_favorites)
     }
 
     private fun FavoriteState() {
         database.use {
             val result = select(FavoriteTeam.TABLE_FAVORITE_TEAM)
-                .whereArgs("(TEAM_ID = {id})",
-                    "id" to teamId)
+                .whereArgs(
+                    "(TEAM_ID = {id})",
+                    "id" to teamId
+                )
             val favorite = result.parseList(classParser<FavoriteTeam>())
             if (favorite.isNotEmpty()) isFavorite = true
         }

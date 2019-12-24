@@ -10,18 +10,22 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class TeamDetailsPresenter(private val view: TeamDetailsView,
-                           private val apiRepository: ApiRepository,
-                           private val gson: Gson,
-                           private val context: CoroutineContextProvider = CoroutineContextProvider()) {
+class TeamDetailsPresenter(
+    private val view: TeamDetailsView,
+    private val apiRepository: ApiRepository,
+    private val gson: Gson,
+    private val context: CoroutineContextProvider = CoroutineContextProvider()
+) {
 
     fun getTeamDetail(teamId: String) {
         view.showLoading()
 
-        GlobalScope.launch(Dispatchers.Main){
-            val data = gson.fromJson(apiRepository
-                .doRequest(TheSportDBApi.getTeamDetails(teamId)).await(),
-                TeamDetailsResponse::class.java)
+        GlobalScope.launch(Dispatchers.Main) {
+            val data = gson.fromJson(
+                apiRepository
+                    .doRequest(TheSportDBApi.getTeamDetails(teamId)).await(),
+                TeamDetailsResponse::class.java
+            )
 
             view.showTeamDetails(data.teams)
             view.hideLoading()

@@ -8,10 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rmalan.app.footballleague.R
 import com.rmalan.app.footballleague.model.Standings
 
-class StandingsAdapter (private val standings: List<Standings>)
-    : RecyclerView.Adapter<StandingViewHolder>() {
+class StandingsAdapter(private val standings: List<Standings>) :
+    RecyclerView.Adapter<StandingViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StandingViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_standing, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_standing, parent, false)
         return StandingViewHolder(view)
     }
 

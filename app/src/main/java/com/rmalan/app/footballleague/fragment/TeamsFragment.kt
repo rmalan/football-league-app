@@ -5,10 +5,10 @@ import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -26,7 +26,6 @@ import com.rmalan.app.footballleague.view.TeamsView
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.onRefresh
-import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
 
 class TeamsFragment : Fragment(), AnkoComponent<Context>, TeamsView {
@@ -64,7 +63,11 @@ class TeamsFragment : Fragment(), AnkoComponent<Context>, TeamsView {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return createView(AnkoContext.Companion.create(requireContext()))
     }
 
@@ -81,7 +84,8 @@ class TeamsFragment : Fragment(), AnkoComponent<Context>, TeamsView {
                     R.color.colorAccent,
                     android.R.color.holo_green_light,
                     android.R.color.holo_orange_light,
-                    android.R.color.holo_orange_light)
+                    android.R.color.holo_orange_light
+                )
 
                 relativeLayout {
                     lparams(width = matchParent, height = wrapContent)

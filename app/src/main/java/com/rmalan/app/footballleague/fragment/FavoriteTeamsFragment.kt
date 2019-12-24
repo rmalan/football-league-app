@@ -3,21 +3,18 @@ package com.rmalan.app.footballleague.fragment
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-
 import com.rmalan.app.footballleague.R
 import com.rmalan.app.footballleague.activity.TeamDetailsActivity
 import com.rmalan.app.footballleague.adapter.FavoriteTeamsAdapter
-import com.rmalan.app.footballleague.adapter.SectionsPagerFavoriteAdapter
 import com.rmalan.app.footballleague.db.database
 import com.rmalan.app.footballleague.model.FavoriteTeam
-import kotlinx.android.synthetic.main.fragment_favorite.*
 import org.jetbrains.anko.*
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.select
@@ -63,7 +60,11 @@ class FavoriteTeamsFragment : Fragment(), AnkoComponent<Context> {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return createView(AnkoContext.Companion.create(requireContext()))
     }
 
@@ -75,13 +76,15 @@ class FavoriteTeamsFragment : Fragment(), AnkoComponent<Context> {
             rightPadding = dip(16)
 
             swipeRefresh = swipeRefreshLayout {
-                setColorSchemeResources(R.color.colorAccent,
+                setColorSchemeResources(
+                    R.color.colorAccent,
                     android.R.color.holo_green_light,
                     android.R.color.holo_orange_light,
-                    android.R.color.holo_red_light)
+                    android.R.color.holo_red_light
+                )
 
                 listTeam = recyclerView {
-                    lparams (width = matchParent, height = wrapContent)
+                    lparams(width = matchParent, height = wrapContent)
                     layoutManager = LinearLayoutManager(ctx)
                 }
             }

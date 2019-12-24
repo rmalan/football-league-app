@@ -11,11 +11,20 @@ import com.rmalan.app.footballleague.model.FavoriteTeam
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.*
 
-class FavoriteTeamsAdapter(private val favoriteTeams: List<FavoriteTeam>, private val listener: (FavoriteTeam) -> Unit)
-    : RecyclerView.Adapter<FavoriteTeamsViewHolder>() {
+class FavoriteTeamsAdapter(
+    private val favoriteTeams: List<FavoriteTeam>,
+    private val listener: (FavoriteTeam) -> Unit
+) : RecyclerView.Adapter<FavoriteTeamsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteTeamsViewHolder {
-        return FavoriteTeamsViewHolder(FavoriteTeamsUI().createView(AnkoContext.create(parent.context, parent)))
+        return FavoriteTeamsViewHolder(
+            FavoriteTeamsUI().createView(
+                AnkoContext.create(
+                    parent.context,
+                    parent
+                )
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: FavoriteTeamsViewHolder, position: Int) {
@@ -29,14 +38,14 @@ class FavoriteTeamsAdapter(private val favoriteTeams: List<FavoriteTeam>, privat
 class FavoriteTeamsUI : AnkoComponent<ViewGroup> {
     override fun createView(ui: AnkoContext<ViewGroup>): View {
         return with(ui) {
-            linearLayout{
+            linearLayout {
                 lparams(width = matchParent, height = wrapContent)
                 padding = dip(16)
                 orientation = LinearLayout.HORIZONTAL
 
                 imageView {
                     id = R.id.team_badge
-                }.lparams{
+                }.lparams {
                     height = dip(50)
                     width = dip(50)
                 }
@@ -44,7 +53,7 @@ class FavoriteTeamsUI : AnkoComponent<ViewGroup> {
                 textView {
                     id = R.id.team_name
                     textSize = 16f
-                }.lparams{
+                }.lparams {
                     margin = dip(15)
                 }
 
@@ -53,7 +62,7 @@ class FavoriteTeamsUI : AnkoComponent<ViewGroup> {
     }
 }
 
-class FavoriteTeamsViewHolder(view: View) : RecyclerView.ViewHolder(view){
+class FavoriteTeamsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val teamBadge: ImageView = view.findViewById(R.id.team_badge)
     private val teamName: TextView = view.findViewById(R.id.team_name)

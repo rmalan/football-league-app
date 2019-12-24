@@ -9,6 +9,7 @@ import com.rmalan.app.footballleague.R
 import com.rmalan.app.footballleague.model.Events
 import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.util.*
 
 class MatchAdapter(
     private val match: List<Events>,
@@ -36,7 +37,7 @@ class MatchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     fun bindItem(match: Events, listener: (Events) -> Unit) {
         val dateMatch: String? = match.dateEvent
-        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
+        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         try {
             val date = simpleDateFormat.parse(dateMatch)
             val newFormat = SimpleDateFormat("EE, MM/dd")

@@ -1,6 +1,11 @@
 package com.rmalan.app.footballleague.model
 
-data class FavoriteTeam(val id: Long?, val teamId: String?, val teamName: String?, val teamBadge: String?) {
+data class FavoriteTeam(
+    val id: Long?,
+    val teamId: String?,
+    val teamName: String?,
+    val teamBadge: String?
+) {
 
     companion object {
         const val TABLE_FAVORITE_TEAM: String = "TABLE_FAVORITE_TEAM"
